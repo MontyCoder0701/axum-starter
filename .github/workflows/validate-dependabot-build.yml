@@ -1,0 +1,29 @@
+name: validate-dependabot-build
+
+on:
+  pull_request:
+    branches:
+      - "dependabot/**"
+  push:
+    branches:
+      - "dependabot/**"
+
+jobs:
+  validate-dependabot-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Rust setup
+        run: rustup toolchain install stable --profile minimal
+
+      - name: Install clippy
+        run: rustup component add clippy
+
+      - name: Build project
+        run: cargo build --release
+
+      - name: Run clippy
+        run: cargo clippy -- -D warnings
