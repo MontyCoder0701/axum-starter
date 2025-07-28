@@ -5,4 +5,7 @@ edition = "2024"
 
 [dependencies]
 axum = "0.8.4"
-tokio = { version = "1.47.0", features = ["rt-multi-thread"] }
+diesel = { version = "2.2.0", features = ["mysql"] }
+deadpool-diesel = { version = "0.6.1", features = ["mysql"] } 
+tokio = { version = "1.47.0", features = ["rt-multi-thread", "macros"] }
+dotenvy = "0.15.7"

@@ -1,1 +1,5 @@
+## Build results
 /target
+
+## Environment Variables
+.env
