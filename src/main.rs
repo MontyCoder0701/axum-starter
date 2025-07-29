@@ -3,7 +3,6 @@ use std::env;
 use axum::{
     Router,
     http::{HeaderValue, Method, header::AUTHORIZATION, header::CONTENT_TYPE},
-    routing::get,
 };
 use deadpool_diesel::{
     Runtime,
@@ -12,6 +11,8 @@ use deadpool_diesel::{
 use dotenvy::dotenv;
 use tokio::net::TcpListener;
 use tower_http::cors::CorsLayer;
+
+mod hello;
 
 #[tokio::main]
 async fn main() {
@@ -28,7 +29,7 @@ async fn main() {
         .allow_headers([AUTHORIZATION, CONTENT_TYPE]);
 
     let app = Router::new()
-        .route("/", get(|| async { "Hello, World!" }))
+        .merge(hello::controller::routes())
         .layer(cors)
         .with_state(pool);
 
