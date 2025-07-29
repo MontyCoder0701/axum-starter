@@ -21,7 +21,7 @@ async fn main() {
     dotenv().ok();
 
     const PORT: u16 = 3200;
-    const HOST: &'static str = "localhost";
+    const HOST: &str = "localhost";
 
     let db_url = env::var("DATABASE_URL").unwrap();
     let client_url = env::var("CLIENT_URL").unwrap();

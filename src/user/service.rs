@@ -14,5 +14,5 @@ pub async fn get_users(State(pool): State<Pool>) -> Result<Json<Vec<User>>, (Sta
         .map_err(internal_error)?
         .map_err(internal_error)?;
 
-    return Ok(Json(users));
+    Ok(Json(users))
 }
