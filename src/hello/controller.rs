@@ -1,6 +1,10 @@
 use axum::{Router, routing::get};
 use deadpool_diesel::mysql::Pool;
 
+use super::service::get_greeting;
+
+const PATH: &'static str = "/";
+
 pub fn routes() -> Router<Pool> {
-    Router::new().route("/", get(super::service::get_greeting()))
+    return Router::new().route(PATH, get(get_greeting()));
 }

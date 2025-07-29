@@ -12,7 +12,9 @@ use dotenvy::dotenv;
 use tokio::net::TcpListener;
 use tower_http::cors::CorsLayer;
 
+mod common;
 mod hello;
+mod user;
 
 #[tokio::main]
 async fn main() {
@@ -30,6 +32,7 @@ async fn main() {
 
     let app = Router::new()
         .merge(hello::controller::routes())
+        .merge(user::controller::routes())
         .layer(cors)
         .with_state(pool);
 

@@ -1,6 +1,6 @@
 diesel::table! {
-    hello (id) {
+    user (id) {
         id -> Integer,
-        title -> Varchar,
+        name -> Varchar,
     }
 }

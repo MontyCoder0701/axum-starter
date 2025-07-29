@@ -1,5 +1,5 @@
 -- Your SQL goes here
-CREATE TABLE hello (
+CREATE TABLE user (
     id INT PRIMARY KEY AUTO_INCREMENT,
-    title VARCHAR(255) NOT NULL
+    name VARCHAR(255) NOT NULL
 );
