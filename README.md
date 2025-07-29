@@ -33,7 +33,7 @@ DATABASE_URL=
 
 Run local server.
 
-```rust
+```bash
 cargo run
 ```
 
@@ -43,31 +43,31 @@ Server is running on http://localhost:3200.
 
 Generate migration
 
-```rust
+```bash
 diesel migration generate --diff-schema {migration_name}
 ```
 
 Run migration
 
-```rust
+```bash
 diesel migration run
 ```
 
 Revert migration with
 
-```rust
+```bash
 diesel migration revert
 ```
 
 Redo migration with
 
-```rust
+```bash
 diesel migration redo
 ```
 
 After changing schema, apply to migration
 
-```rust
+```bash
 diesel migration generate --diff-schema {migration_name}
 ```
 
