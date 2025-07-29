@@ -2,7 +2,10 @@ use std::env;
 
 use axum::{
     Router,
-    http::{HeaderValue, Method, header::AUTHORIZATION, header::CONTENT_TYPE},
+    http::{
+        HeaderValue, Method, StatusCode,
+        header::{AUTHORIZATION, CONTENT_TYPE},
+    },
 };
 use deadpool_diesel::{
     Runtime,
@@ -39,7 +42,8 @@ async fn main() {
         .merge(hello::controller::routes())
         .merge(user::controller::routes())
         .layer(cors)
-        .with_state(pool);
+        .with_state(pool)
+        .fallback((StatusCode::NOT_FOUND, "404 Not Found"));
 
     let listener = TcpListener::bind(format!("{HOST}:{PORT}")).await.unwrap();
 
