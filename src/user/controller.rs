@@ -1,4 +1,7 @@
-use axum::{Router, routing::get};
+use axum::{
+    Router,
+    routing::{MethodRouter, get},
+};
 use deadpool_diesel::mysql::Pool;
 
 use super::service::UserService;
@@ -15,6 +18,10 @@ impl UserController {
     }
 
     pub fn routes(&self) -> Router<Pool> {
-        Router::new().route(&self.path, get(UserService::get_users))
+        Router::new().route(&self.path, Self::get())
+    }
+
+    pub fn get() -> MethodRouter<Pool> {
+        get(UserService::get)
     }
 }

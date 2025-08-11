@@ -5,12 +5,10 @@ use diesel::prelude::*;
 use super::{model::User, schema::user};
 use crate::common::utils::internal_error;
 
-pub struct UserService {}
+pub struct UserService;
 
 impl UserService {
-    pub async fn get_users(
-        State(pool): State<Pool>,
-    ) -> Result<Json<Vec<User>>, (StatusCode, String)> {
+    pub async fn get(State(pool): State<Pool>) -> Result<Json<Vec<User>>, (StatusCode, String)> {
         let conn = pool.get().await.map_err(internal_error)?;
 
         let users = conn
