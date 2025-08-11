@@ -1,10 +1,20 @@
 use axum::{Router, routing::get};
 use deadpool_diesel::mysql::Pool;
 
-use super::service::get_users;
+use super::service::UserService;
 
-const PATH: &str = "/users";
+pub struct UserController {
+    path: String,
+}
 
-pub fn routes() -> Router<Pool> {
-    Router::new().route(PATH, get(get_users))
+impl UserController {
+    pub fn new() -> Self {
+        Self {
+            path: "/users".to_string(),
+        }
+    }
+
+    pub fn routes(&self) -> Router<Pool> {
+        Router::new().route(&self.path, get(UserService::get_users))
+    }
 }

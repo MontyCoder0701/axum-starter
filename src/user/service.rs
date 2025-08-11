@@ -5,14 +5,20 @@ use diesel::prelude::*;
 use super::{model::User, schema::user};
 use crate::common::utils::internal_error;
 
-pub async fn get_users(State(pool): State<Pool>) -> Result<Json<Vec<User>>, (StatusCode, String)> {
-    let conn = pool.get().await.map_err(internal_error)?;
+pub struct UserService {}
 
-    let users = conn
-        .interact(|conn| user::table.select(User::as_select()).load(conn))
-        .await
-        .map_err(internal_error)?
-        .map_err(internal_error)?;
+impl UserService {
+    pub async fn get_users(
+        State(pool): State<Pool>,
+    ) -> Result<Json<Vec<User>>, (StatusCode, String)> {
+        let conn = pool.get().await.map_err(internal_error)?;
 
-    Ok(Json(users))
+        let users = conn
+            .interact(|conn| user::table.select(User::as_select()).load(conn))
+            .await
+            .map_err(internal_error)?
+            .map_err(internal_error)?;
+
+        Ok(Json(users))
+    }
 }

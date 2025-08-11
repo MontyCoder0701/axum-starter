@@ -15,6 +15,9 @@ use dotenvy::dotenv;
 use tokio::net::TcpListener;
 use tower_http::cors::CorsLayer;
 
+use crate::user::controller::UserController;
+
+mod base;
 mod common;
 mod hello;
 mod user;
@@ -38,9 +41,11 @@ async fn main() {
         .allow_credentials(true)
         .allow_headers([AUTHORIZATION, CONTENT_TYPE]);
 
+    let user_controller = UserController::new();
+
     let app = Router::new()
         .merge(hello::controller::routes())
-        .merge(user::controller::routes())
+        .merge(user_controller.routes())
         .layer(cors)
         .with_state(pool)
         .fallback((StatusCode::NOT_FOUND, "404 Not Found"));
