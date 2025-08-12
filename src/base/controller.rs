@@ -7,6 +7,7 @@ use serde::de::DeserializeOwned;
 
 use super::service::BaseService;
 
+#[allow(dead_code)]
 pub trait BaseController<T, Id>: Sized
 where
     T: serde::Serialize + Send + Sync + 'static,
