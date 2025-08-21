@@ -7,7 +7,6 @@ use serde::de::DeserializeOwned;
 
 use super::service::BaseService;
 
-#[allow(dead_code)]
 pub trait BaseController<T, Id>: Sized
 where
     T: serde::Serialize + Send + Sync + 'static,
@@ -22,7 +21,7 @@ where
             Self::path(),
             Router::new()
                 .route("/", Self::get_many())
-                .route("/:id", Self::delete_one()),
+                .route("/{id}", Self::delete_one()),
         )
     }
 

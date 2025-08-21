@@ -1,27 +1,12 @@
-use axum::{
-    Router,
-    routing::{MethodRouter, get},
-};
-use deadpool_diesel::mysql::Pool;
+use super::{model::User, service::UserService};
+use crate::base::controller::BaseController;
 
-use super::service::UserService;
+pub struct UserController;
 
-pub struct UserController {
-    path: String,
-}
+impl BaseController<User, i32> for UserController {
+    type Service = UserService;
 
-impl UserController {
-    pub fn new() -> Self {
-        Self {
-            path: "/users".to_string(),
-        }
-    }
-
-    pub fn routes(&self) -> Router<Pool> {
-        Router::new().route(&self.path, Self::get())
-    }
-
-    pub fn get() -> MethodRouter<Pool> {
-        get(UserService::get)
+    fn path() -> &'static str {
+        "/users"
     }
 }
