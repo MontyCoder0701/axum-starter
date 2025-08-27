@@ -3,7 +3,7 @@ use std::env;
 use axum::{
     Router,
     http::{
-        HeaderValue, Method, StatusCode,
+        Method, StatusCode,
         header::{AUTHORIZATION, CONTENT_TYPE},
     },
 };
@@ -30,13 +30,11 @@ async fn main() {
     const HOST: &str = "localhost";
 
     let db_url = env::var("DATABASE_URL").unwrap();
-    let client_url = env::var("CLIENT_URL").unwrap();
 
     let manager = Manager::new(db_url, Runtime::Tokio1);
     let pool = Pool::builder(manager).build().unwrap();
 
     let cors = CorsLayer::new()
-        .allow_origin(client_url.parse::<HeaderValue>().unwrap())
         .allow_methods([Method::GET, Method::POST, Method::PATCH, Method::DELETE])
         .allow_credentials(true)
         .allow_headers([AUTHORIZATION, CONTENT_TYPE]);

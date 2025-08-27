@@ -31,49 +31,61 @@ Add and place `.env` in root directory. Fill in appropriate values for each.
 DATABASE_URL=
 ```
 
+Install Diesel
+
+```sh
+curl --proto '=https' --tlsv1.2 -LsSf https://github.com/diesel-rs/diesel/releases/latest/download/diesel_cli-installer.sh | sh
+```
+
+Run initial setup
+
+```sh
+diesel setup
+```
+
 Run local server.
 
-```bash
+```sh
 cargo run
 ```
 
-Server is running on http://localhost:3200.
+Server is running on <http://localhost:3200>.
 
 ## Migrations
 
 Generate migration
 
-```bash
+```sh
 diesel migration generate --diff-schema {migration_name}
 ```
 
 Run migration
 
-```bash
+```sh
 diesel migration run
 ```
 
 Revert migration with
 
-```bash
+```sh
 diesel migration revert
 ```
 
 Redo migration with
 
-```bash
+```sh
 diesel migration redo
 ```
 
 After changing schema, apply to migration
 
-```bash
+```sh
 diesel migration generate --diff-schema {migration_name}
 ```
 
 ## Troubleshooting
 
-https://github.com/diesel-rs/diesel/issues/1286
+<https://github.com/diesel-rs/diesel/issues/1286>
 
 Make sure to setup system variables for MySQL in Windows.
 
