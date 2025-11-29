@@ -9,6 +9,6 @@ diesel = { version = "2.3.3", features = ["mysql"] }
 deadpool-diesel = { version = "0.6.1", features = ["mysql"] } 
 tokio = { version = "1.48.0", features = ["rt-multi-thread", "macros"] }
 dotenvy = "0.15.7"
-tower-http = { version =  "0.6.6", features = ["cors"] }
+tower-http = { version =  "0.6.7", features = ["cors"] }
 serde = { version = "1.0.219", features = ["derive"] }
 async-trait = "0.1.89"
